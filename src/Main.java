@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public class Main {
     List<String> listOfInput = new ArrayList<>();
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         Main main = new Main();
 
@@ -28,20 +28,20 @@ public class Main {
     }
 
     private int valid;
-    HashMap<String, String> passportData = new HashMap<String, String>();
+    HashMap<String, String> passportData = new HashMap<>();
 
     public void isValid() {
         List<String> listOfElements;
 
-        for (int i = 0; i < listOfInput.size(); i++) {
-            listOfElements = Arrays.asList(listOfInput.get(i).split(" "));
+        for (String s : listOfInput) {
+            listOfElements = Arrays.asList(s.split(" "));
 
-            for (int a = 0; a < listOfElements.size(); a++) {
+            for (String listOfElement : listOfElements) {
 
 
-                String[] parts = listOfElements.get(a).split(":");
+                String[] parts = listOfElement.split(":");
 
-                if (!listOfElements.get(a).isEmpty()) {
+                if (!listOfElement.isEmpty()) {
                     passportData.put(parts[0], parts[1]);
                 }
                 if (passportData.size() == 8) {
@@ -50,11 +50,11 @@ public class Main {
                 } else if (passportData.size() == 7 && !passportData.containsKey("cid")) {
                     valid = valid + 1;
                     passportData.clear();
-                } else if (listOfElements.get(a).isEmpty()) {
+                } else if (listOfElement.isEmpty()) {
                     passportData.clear();
                     System.out.println(valid);
                 }
-                System.out.println(listOfElements.get(a));
+                System.out.println(listOfElement);
             }
         }
         System.out.println(valid);
