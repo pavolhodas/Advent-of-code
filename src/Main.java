@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 public class Main {
     List<String> listOfInput = new ArrayList<>();
+
     public static void main(String args[]) {
 
         Main main = new Main();
@@ -25,39 +26,36 @@ public class Main {
         }
         main.isValid();
     }
+
     private int valid;
     HashMap<String, String> passportData = new HashMap<String, String>();
 
-    public void isValid(){
+    public void isValid() {
+        List<String> listOfElements;
 
-        List<String> listOfElements = new ArrayList<>();
-
-        for(int i = 0;i<listOfInput.size();i++){
+        for (int i = 0; i < listOfInput.size(); i++) {
             listOfElements = Arrays.asList(listOfInput.get(i).split(" "));
 
-            for(int a = 0; a<listOfElements.size();a++) {
+            for (int a = 0; a < listOfElements.size(); a++) {
 
 
-                    String[] parts = listOfElements.get(a).split(":");
+                String[] parts = listOfElements.get(a).split(":");
 
-                    if(!listOfElements.isEmpty()) {
-                        passportData.put(parts[0], parts[1]);
-                    }
-                //if(listOfElements.get(a+1).isEmpty()) {
-                    if (passportData.size() == 8) {
-                        valid = valid + 1;
-                        passportData.clear();
-                    } else if (passportData.size() == 7 && !passportData.containsKey("cid")) {
-                        valid = valid + 1;
-                        passportData.clear();
-                    }
-                    System.out.println(listOfElements.get(a));
-                //}
+                if (!listOfElements.get(a).isEmpty()) {
+                    passportData.put(parts[0], parts[1]);
+                }
+                if (passportData.size() == 8) {
+                    valid = valid + 1;
+                    passportData.clear();
+                } else if (passportData.size() == 7 && !passportData.containsKey("cid")) {
+                    valid = valid + 1;
+                    passportData.clear();
+                } else if (listOfElements.get(a).isEmpty()) {
+                    passportData.clear();
+                    System.out.println(valid);
+                }
+                System.out.println(listOfElements.get(a));
             }
-
-//            if(listOfInput.get(i).isEmpty()){
-//                i= listOfInput.size();
-//            }
         }
         System.out.println(valid);
     }
