@@ -31,14 +31,24 @@ public class Main {
 
         int previous = 0;
         int i = 0;
+        int sum = 0;
+        int oldSum = 0;
 
-        for (int a =  0; a < listOfInput.size(); a++) {
-            if(previous < Integer.parseInt(listOfInput.get(a))){
-                i++;
-                System.out.println(Integer.parseInt(listOfInput.get(a)));
+        for (int a =  1; a < listOfInput.size(); a++) {
+            sum = 0;
+            for(int b = a; b <= a + 3; b++){
+                if(b < listOfInput.size()) {
+                    sum += Integer.parseInt(listOfInput.get(b));
+                }
             }
-            previous = Integer.parseInt(listOfInput.get(a));
+
+
+            if(oldSum < sum && oldSum != 0){
+                i++;
+
+            }
+            oldSum = sum;
         }
-        System.out.println(i-1);
+        System.out.println(i);
     }
 }
