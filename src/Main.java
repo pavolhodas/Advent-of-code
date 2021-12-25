@@ -29,26 +29,28 @@ public class Main {
 
     public void isIncreased() {
 
-        int previous = 0;
+        int forwardByAim = 0;
+        int forward = 0;
+        int down = 0;
+        int up = 0;
+
         int i = 0;
-        int sum = 0;
-        int oldSum = 0;
+        String[] splitString;
 
-        for (int a =  1; a < listOfInput.size(); a++) {
-            sum = 0;
-            for(int b = a; b <= a + 3; b++){
-                if(b < listOfInput.size()) {
-                    sum += Integer.parseInt(listOfInput.get(b));
-                }
+        for (int a =  0; a < listOfInput.size(); a++) {
+            splitString = listOfInput.get(a).split(" ");
+
+            if(splitString[0].equals("forward")){
+                forward += Integer.parseInt(splitString[1]);
+                forwardByAim += Integer.parseInt(splitString[1]) * (down - up);
+
+            } else if(splitString[0].equals("down")){
+                down += Integer.parseInt(splitString[1]);
+
+            }  else if(splitString[0].equals("up")){
+                up += Integer.parseInt(splitString[1]);
             }
-
-
-            if(oldSum < sum && oldSum != 0){
-                i++;
-
-            }
-            oldSum = sum;
         }
-        System.out.println(i);
+        System.out.println(forwardByAim * forward);
     }
 }
