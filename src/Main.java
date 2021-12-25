@@ -24,39 +24,21 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        main.isValid();
+        main.isIncreased();
     }
 
-    private int valid;
-    HashMap<String, String> passportData = new HashMap<>();
+    public void isIncreased() {
 
-    public void isValid() {
-        List<String> listOfElements;
+        int previous = 0;
+        int i = 0;
 
-        for (String s : listOfInput) {
-            listOfElements = Arrays.asList(s.split(" "));
-
-            for (String listOfElement : listOfElements) {
-
-
-                String[] parts = listOfElement.split(":");
-
-                if (!listOfElement.isEmpty()) {
-                    passportData.put(parts[0], parts[1]);
-                }
-                if (passportData.size() == 8) {
-                    valid = valid + 1;
-                    passportData.clear();
-                } else if (passportData.size() == 7 && !passportData.containsKey("cid")) {
-                    valid = valid + 1;
-                    passportData.clear();
-                } else if (listOfElement.isEmpty()) {
-                    passportData.clear();
-                    System.out.println(valid);
-                }
-                System.out.println(listOfElement);
+        for (int a =  0; a < listOfInput.size(); a++) {
+            if(previous < Integer.parseInt(listOfInput.get(a))){
+                i++;
+                System.out.println(Integer.parseInt(listOfInput.get(a)));
             }
+            previous = Integer.parseInt(listOfInput.get(a));
         }
-        System.out.println(valid);
+        System.out.println(i-1);
     }
 }
