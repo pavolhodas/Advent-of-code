@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Main {
-    List<String> listOfInput = new ArrayList<>();
+    List<String> listOfDataInput = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -19,58 +19,103 @@ public class Main {
         //read file into stream, try-with-resources
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
 
-            stream.forEach(main.listOfInput::add);
+            stream.forEach(main.listOfDataInput::add);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        main.isIncreased();
+        main.result();
     }
 
-    public void isIncreased() {
+    String co2Num = "";
+    String oxygenNumber = "";
 
-        int a = 0;
-        int b = 0;
-        String[] splitter;
+    public void oxygenRating() {
+
+        List<String> listOfInput = new ArrayList<>(listOfDataInput);
+
+        int previous = 0;
         ArrayList<String> binary1 = new ArrayList<>();
         ArrayList<String> binary0 = new ArrayList<>();
-        ArrayList<String> binary = (ArrayList<String>) listOfInput;
-        ArrayList<String> binaryy = new ArrayList<>();
-        for(int n = 0; n < 12; n++){
-            for(int i = 0; i < binary.size(); i++) {
 
-                    splitter = binary.get(i).split("");
-                if(Integer.parseInt(splitter[n]) == 1){
-                    a++;
-                    System.out.println(a);
-                    binary1.add(binary.get(i));
-                }else if(Integer.parseInt(splitter[n]) == 0){
-                    b++;
-                    binary0.add(binary.get(i));
-                }
+        int bitSize = listOfInput.get(0).length();
 
-                if(a + b == binary.size()){
-                    if(a > b){
-                        binaryy = binary1;
-                        //binary1.clear();
-                        System.out.println(binary + "jjj");
-                    }else if(a < b){
-                        binaryy = binary0;
-                        //binary0.clear();
-                        System.out.println(binary + "nnn");
-                    }
-                    a=0;
-                    b=0;
-                    binary = binaryy;
+        for (int n = 0; n < bitSize; n++) {
+            previous = 0;
+            int c = 0;
+            for (int i = 0; i < listOfInput.size(); i++) {
+
+                c += Character.getNumericValue(listOfInput.get(i).charAt(n));
+                if (c == previous) {
+                    binary0.add(String.valueOf(listOfInput.get(i)));
+                } else {
+                    binary1.add(String.valueOf(listOfInput.get(i)));
                 }
+                previous = c;
 
             }
-            binary = binaryy;
+            if(n == 0){
+                listOfInput.removeAll(binary0);
+            } else if (binary0.size() > binary1.size()) {
+                listOfInput.removeAll(binary1);
+            } else {
+                listOfInput.removeAll(binary0);
+            }
+            //System.out.println(listOfInput);
+            oxygenNumber = listOfInput.get(0);
+            //System.out.println(oxygenNumber);
+            binary0.clear();
+            binary1.clear();
 
-
-            //System.out.println(binary1);
-            //System.out.println(n);
-            System.out.println(binary.size());
         }
+    }
+    public void co2Rating () {
+
+        List<String> listOfInput = new ArrayList<>(listOfDataInput);
+
+        int previous = 0;
+        ArrayList<String> binary1 = new ArrayList<>();
+        ArrayList<String> binary0 = new ArrayList<>();
+
+        int bitSize = listOfInput.get(0).length();
+
+        for (int n = 0; n < bitSize; n++) {
+            previous = 0;
+            int c = 0;
+            for (int i = 0; i < listOfInput.size(); i++) {
+
+                c += Character.getNumericValue(listOfInput.get(i).charAt(n));
+                if (c == previous) {
+                    binary0.add(String.valueOf(listOfInput.get(i)));
+                } else {
+                    binary1.add(String.valueOf(listOfInput.get(i)));
+                }
+                previous = c;
+
+            }
+
+            if(n == 0){
+                listOfInput.removeAll(binary1);
+            } else if(listOfInput.size() == 1){
+                //System.out.println(listOfInput);
+            } else if (binary1.size() < binary0.size()) {
+                listOfInput.removeAll(binary0);
+            } else {
+                listOfInput.removeAll(binary1);
+            }
+            co2Num = listOfInput.get(0);
+            //System.out.println(listOfInput);
+
+            binary0.clear();
+            binary1.clear();
+
+        }
+    }
+
+    public void result(){
+        oxygenRating();
+        co2Rating();
+        System.out.println(Integer.parseInt(oxygenNumber, 2) * Integer.parseInt(co2Num, 2));
+
     }
 }

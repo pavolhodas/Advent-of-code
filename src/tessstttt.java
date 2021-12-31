@@ -2,31 +2,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class tessstttt {
-    List<String> listOfInput = new ArrayList<>();
+    List<String> listOfDataInput = new ArrayList<>();
 
     public static void main(String[] args) {
 
         tessstttt main = new tessstttt();
 
-        main.listOfInput.add("00100");
-        main.listOfInput.add("11110");
-        main.listOfInput.add("10110");
-        main.listOfInput.add("10111");
-        main.listOfInput.add("10101");
-        main.listOfInput.add("01111");
-        main.listOfInput.add("00111");
-        main.listOfInput.add("11100");
-        main.listOfInput.add("10000");
-        main.listOfInput.add("11001");
-        main.listOfInput.add("00010");
-        main.listOfInput.add("01010");
+        main.listOfDataInput.add("00100");
+        main.listOfDataInput.add("11110");
+        main.listOfDataInput.add("10110");
+        main.listOfDataInput.add("10111");
+        main.listOfDataInput.add("10101");
+        main.listOfDataInput.add("01111");
+        main.listOfDataInput.add("00111");
+        main.listOfDataInput.add("11100");
+        main.listOfDataInput.add("10000");
+        main.listOfDataInput.add("11001");
+        main.listOfDataInput.add("00010");
+        main.listOfDataInput.add("01010");
         main.result();
     }
     String co2Num = "";
     String oxygenNumber = "";
 
     public void oxygenRating() {
-
+        List<String> listOfInput = new ArrayList<>();
+        listOfInput = listOfDataInput;
 
         int previous = 0;
         ArrayList<String> binary1 = new ArrayList<>();
@@ -64,19 +65,8 @@ public class tessstttt {
         }
     }
         public void co2Rating () {
-            listOfInput.clear();
-            listOfInput.add("00100");
-            listOfInput.add("11110");
-            listOfInput.add("10110");
-            listOfInput.add("10111");
-            listOfInput.add("10101");
-            listOfInput.add("01111");
-            listOfInput.add("00111");
-            listOfInput.add("11100");
-            listOfInput.add("10000");
-            listOfInput.add("11001");
-            listOfInput.add("00010");
-            listOfInput.add("01010");
+            List<String> listOfInput = new ArrayList<>();
+            listOfInput = listOfDataInput;
 
             int previous = 0;
             ArrayList<String> binary1 = new ArrayList<>();
