@@ -29,28 +29,48 @@ public class Main {
 
     public void isIncreased() {
 
-        int forwardByAim = 0;
-        int forward = 0;
-        int down = 0;
-        int up = 0;
+        int a = 0;
+        int b = 0;
+        String[] splitter;
+        ArrayList<String> binary1 = new ArrayList<>();
+        ArrayList<String> binary0 = new ArrayList<>();
+        ArrayList<String> binary = (ArrayList<String>) listOfInput;
+        ArrayList<String> binaryy = new ArrayList<>();
+        for(int n = 0; n < 12; n++){
+            for(int i = 0; i < binary.size(); i++) {
 
-        int i = 0;
-        String[] splitString;
+                    splitter = binary.get(i).split("");
+                if(Integer.parseInt(splitter[n]) == 1){
+                    a++;
+                    System.out.println(a);
+                    binary1.add(binary.get(i));
+                }else if(Integer.parseInt(splitter[n]) == 0){
+                    b++;
+                    binary0.add(binary.get(i));
+                }
 
-        for (int a =  0; a < listOfInput.size(); a++) {
-            splitString = listOfInput.get(a).split(" ");
+                if(a + b == binary.size()){
+                    if(a > b){
+                        binaryy = binary1;
+                        //binary1.clear();
+                        System.out.println(binary + "jjj");
+                    }else if(a < b){
+                        binaryy = binary0;
+                        //binary0.clear();
+                        System.out.println(binary + "nnn");
+                    }
+                    a=0;
+                    b=0;
+                    binary = binaryy;
+                }
 
-            if(splitString[0].equals("forward")){
-                forward += Integer.parseInt(splitString[1]);
-                forwardByAim += Integer.parseInt(splitString[1]) * (down - up);
-
-            } else if(splitString[0].equals("down")){
-                down += Integer.parseInt(splitString[1]);
-
-            }  else if(splitString[0].equals("up")){
-                up += Integer.parseInt(splitString[1]);
             }
+            binary = binaryy;
+
+
+            //System.out.println(binary1);
+            //System.out.println(n);
+            System.out.println(binary.size());
         }
-        System.out.println(forwardByAim * forward);
     }
 }
